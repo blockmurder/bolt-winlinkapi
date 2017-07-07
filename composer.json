@@ -1,5 +1,5 @@
 {
-    "name": "bolt/bolt-extension-starter",
+    "name": "Blockmurder/WinLinkAPI",
     "description": "",
     "type": "bolt-extension",
     "keywords": [
@@ -13,25 +13,25 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "",
-            "email": "you@example.com"
+            "name": "blockmurder",
+            "email": "info@blockmurder.ch"
         }
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Bolt\\Extension\\YourName\\ExtensionName\\": "src"
+            "Bolt\\Extension\\Blockmurder\\WinLinkAPI\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Bolt\\Extension\\YourName\\ExtensionName\\Tests\\": "tests",
+            "Bolt\\Extension\\Blockmurder\\WinLinkAPI\\Tests\\": "tests",
             "Bolt\\Tests\\": "vendor/bolt/bolt/tests/phpunit/unit/"
         }
     },
     "extra": {
         "bolt-assets": "web",
-        "bolt-class": "Bolt\\Extension\\YourName\\ExtensionName\\ExtensionNameExtension"
+        "bolt-class": "Bolt\\Extension\\Blockmurder\\WinLinkAPI\\WinLinkAPIExtension"
     }
 }
