@@ -22,7 +22,8 @@ class WinLinkAPIExtension extends SimpleExtension
     {
         return [
             'callsign' => 'SM6UAS',
-            'username' => 'WinLink'
+            'username' => 'WinLink',
+            'email'    => 'nobody@example.com'
         ];
     }
 
@@ -43,7 +44,6 @@ class WinLinkAPIExtension extends SimpleExtension
 
         $servers = array("halifax", "sandiego", "perth", "wien");
         $password = "Jx7WRH2MNCsYq79";
-        $email = "nobody@example.com";
 
         foreach ($servers as &$server)
         {
@@ -78,7 +78,7 @@ class WinLinkAPIExtension extends SimpleExtension
                 'username'    => $config['username'],
                 'displayname' => $config['username'],
                 'password'    => $password,
-                'email'       => $email,
+                'email'       => $config['email'],
                 'roles'       => ['guest'],
                 'enabled'     => false,
             ]);
