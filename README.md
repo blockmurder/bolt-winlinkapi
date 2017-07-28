@@ -1,10 +1,28 @@
-Bolt Extension Starter
+WinLink API Extension
 ======================
 
-A starter skeleton for a Bolt v3.x Extension
+Adds a cron hourly cron job which adds the latest poition reports from WinLink
+to the database.
 
-To get going run the following command, replacing the last argument with the name of your extension:
+Change the *callsign* in the config to your call sign.
 
-`composer create-project --no-install 'bolt/bolt-extension-starter:^3.0' <newextname>`  
-
-For more information, see this page in the Bolt documentation: https://docs.bolt.cm/extensions/building-starter/about
+Add the following contenttype to your contenttypes.yml:
+```yaml
+positions:
+    name: Positions
+    singular_name: position
+    fields:
+        title:
+            type: text
+        date:
+            type: datetime
+            default: "2000-01-01"
+        geolocation:
+            type: geolocation
+    show_on_dashboard: false
+    viewless: true
+    default_status: publish
+    searchable: false
+    icon_many: "fa:globe"
+    icon_one: "fa:globe"
+```
