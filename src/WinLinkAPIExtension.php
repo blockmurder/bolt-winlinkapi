@@ -23,13 +23,28 @@ class WinLinkAPIExtension extends SimpleExtension
         return [
             'callsign' => 'SM6UAS',
             'username' => 'WinLink',
-            'email'    => 'nobody@example.com'
+            'email'    => 'nobody@example.com',
+            'cron_interval' => 'hourly'
         ];
     }
 
     protected function subscribe(EventDispatcherInterface $dispatcher)
     {
-        $dispatcher->addListener(CronEvents::CRON_HOURLY, array($this, 'getWinLinkDataFunction'));
+        $config = $this->getConfig();
+        if($config['cron_interval'] == 'daily')
+        {
+            $cronInterval = CronEvents::CRON_DAILY;
+        }
+        else if ($config['cron_interval'] == 'hourly')
+        {
+            $cronInterval = CronEvents::CRON_HOURLY;
+        }
+        else
+        {
+            $cronInterval = CronEvents::CRON_HOURLY;
+        }
+
+        $dispatcher->addListener($cronInterval, array($this, 'getWinLinkDataFunction'));
     }
 
     protected function registerTwigFunctions()

@@ -4,3 +4,6 @@ callsign: SM6UAS
 # User name which owns the entries added by this extension
 username: WinLink
 email: nobody@example.com
+
+# Schedule (hourly, daily)
+cron_interval: hourly
