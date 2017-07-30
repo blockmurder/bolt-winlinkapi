@@ -32,6 +32,19 @@ class WinLinkAPIExtension extends SimpleExtension
         $dispatcher->addListener(CronEvents::CRON_HOURLY, array($this, 'getWinLinkDataFunction'));
     }
 
+    protected function registerTwigFunctions()
+    {
+        return [
+            'getCallSign' => 'getCallSign',
+        ];
+    }
+
+    public function getCallSign()
+    {
+        $config = $this->getConfig();
+        return $config['callsign'];
+    }
+
     /**
     * Render and return the Twig file templates/special/skippy.twig
     *
@@ -102,7 +115,7 @@ class WinLinkAPIExtension extends SimpleExtension
         $positions = $app['storage']->getRepository('positions');
 
         /* find the latest entry made by winlink user */
-        $oldPosition = $positions->findOneBy(['ownerid' => $ownerid ], ['id', 'DESC']);
+        $oldPosition = $positions->findOneBy(['ownerid' => $ownerid, 'callsign' => $config['callsign']], ['id', 'DESC']);
 
         /* search latest saved position in winlink data */
         foreach ($positionReports as &$positionReport)
@@ -119,6 +132,7 @@ class WinLinkAPIExtension extends SimpleExtension
                 $newPosition->setStatus('published');
                 $newPosition->setDatepublish($date);
                 $newPosition->set('date', $date);
+                $newPosition->set('callsign', $config['callsign']);
 
                 /* fill geolocation column */
                 $geolocation = array(

@@ -14,6 +14,9 @@ positions:
     fields:
         title:
             type: text
+        callsign:
+            type: text
+            readonly: true
         date:
             type: datetime
             default: "2000-01-01"
