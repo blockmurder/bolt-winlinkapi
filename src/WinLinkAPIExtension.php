@@ -117,6 +117,8 @@ class WinLinkAPIExtension extends SimpleExtension
         /* find the latest entry made by winlink user */
         $oldPosition = $positions->findOneBy(['ownerid' => $ownerid, 'callsign' => $config['callsign']], ['id', 'DESC']);
 
+        $positionCounter = 0;
+
         /* search latest saved position in winlink data */
         foreach ($positionReports as &$positionReport)
         {
@@ -154,7 +156,12 @@ class WinLinkAPIExtension extends SimpleExtension
                 } catch (StorageException $e) {
                     throw new Exception('An exception occurred saving submission to ContentType table positions.', $e->getCode(), $e);
                 }
+
+                $positionCounter++;
             }
         }
+
+        $app['logger.system']->info(sprintf('Added %d new position reports from server %s.winlink.org', $positionCounter, $server), ['event' => 'WinLinkAPI', 'source' => __CLASS__]);
+
     }
 }
