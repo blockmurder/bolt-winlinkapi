@@ -51,6 +51,14 @@ class WinLinkAPIExtension extends SimpleExtension
     {
         return [
             'getCallSign' => 'getCallSign',
+            'geoString'    => ['geoString', ['is_safe' => ['html']]],
+        ];
+    }
+
+    protected function registerTwigFilters()
+    {
+        return [
+            'geoString'    => ['geoString', ['is_safe' => ['html']]],
         ];
     }
 
@@ -59,6 +67,42 @@ class WinLinkAPIExtension extends SimpleExtension
         $config = $this->getConfig();
         return $config['callsign'];
     }
+
+    public function geoString(array $geolocation = [])
+    {
+        $geoStringLat = "";
+        $geoStringLong = "";
+
+        if($geolocation['latitude'] == NULL || $geolocation['longitude'] == NULL)
+        {
+            return $geoString;
+        }
+
+        $latitude = $this->ddToDms($geolocation['latitude']);
+        $longitude = $this->ddToDms($geolocation['longitude']);
+
+        if($latitude['deg'] >= 0)
+        {
+            $geoStringLat = $latitude['deg']."° ".$latitude['min']."' ".$latitude['sec']."\""." N";
+        }
+        else
+        {
+            $geoStringLat = abs($longitude['deg'])."° ".$longitude['min']."' ".$longitude['sec']."\""." S";
+        }
+
+        if($longitude['deg'] >= 0)
+        {
+            $geoStringLong = $longitude['deg']."° ".$longitude['min']."' ".$longitude['sec']."\""." E";
+        }
+        else
+        {
+            $geoStringLong = abs($longitude['deg'])."° ".$longitude['min']."' ".$longitude['sec']."\""." W";
+        }
+
+        return array("latStr"=>$geoStringLat,"longStr"=>$geoStringLong);
+    }
+
+
 
     /**
     * Render and return the Twig file templates/special/skippy.twig
@@ -178,5 +222,19 @@ class WinLinkAPIExtension extends SimpleExtension
 
         $app['logger.system']->info(sprintf('Added %d new position reports from server %s.winlink.org', $positionCounter, $server), ['event' => 'WinLinkAPI', 'source' => __CLASS__]);
 
+    }
+
+    private function ddToDms($dec)
+    {
+        // Converts decimal format to DMS ( Degrees / minutes / seconds )
+        $vars = explode(".",$dec);
+        $deg = $vars[0];
+        $tempma = "0.".$vars[1];
+
+        $tempma = $tempma * 3600;
+        $min = floor($tempma / 60);
+        $sec = round($tempma - ($min*60),4);
+
+        return array("deg"=>$deg,"min"=>$min,"sec"=>$sec);
     }
 }
