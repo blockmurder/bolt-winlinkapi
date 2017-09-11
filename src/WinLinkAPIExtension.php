@@ -83,16 +83,16 @@ class WinLinkAPIExtension extends SimpleExtension
 
         if($latitude['deg'] >= 0)
         {
-            $geoStringLat = $latitude['deg']."° ".$latitude['min']."' ".$latitude['sec']."\""." N";
+            $geoStringLat = abs($latitude['deg'])."° ".$latitude['min']."' ".$latitude['sec']."\""." N";
         }
         else
         {
-            $geoStringLat = abs($longitude['deg'])."° ".$longitude['min']."' ".$longitude['sec']."\""." S";
+            $geoStringLat = abs($latitude['deg'])."° ".$latitude['min']."' ".$latitude['sec']."\""." S";
         }
 
         if($longitude['deg'] >= 0)
         {
-            $geoStringLong = $longitude['deg']."° ".$longitude['min']."' ".$longitude['sec']."\""." E";
+            $geoStringLong = abs($longitude['deg'])."° ".$longitude['min']."' ".$longitude['sec']."\""." E";
         }
         else
         {
