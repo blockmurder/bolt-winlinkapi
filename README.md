@@ -1,7 +1,7 @@
 WinLink API Extension
 =====================
 
-Adds a cron job which gets the latest poition reports of your callsing from WinLink.org
+Adds a cron job which gets the latest poition reports of your callsing from [WinLink](https://winlink.org/userPositions)
 and adds them to the database. New positions are stored in the database table called `positions`
 (see `contenttypes.yml` example).
 
