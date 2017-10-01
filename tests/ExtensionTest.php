@@ -1,15 +1,15 @@
 <?php
 
-namespace Bolt\Extension\YourName\ExtensionName\Tests;
+namespace Bolt\Extension\Blockmurder\WinLinkAPI\Tests;
 
 use Bolt\Tests\BoltUnitTest;
-use Bolt\Extension\YourName\ExtensionName\ExtensionNameExtension;
+use Bolt\Extension\Blockmurder\WinLinkAPI\WinLinkAPIExtension;
 
-/**
- * ExtensionName testing class.
- *
- * @author Your Name <you@example.com>
- */
+ /**
+  * ExtensionName testing class.
+  *
+  * @author blockmurder <info@blockmurder.com>
+  */
 class ExtensionTest extends BoltUnitTest
 {
     /**
@@ -18,10 +18,10 @@ class ExtensionTest extends BoltUnitTest
     public function testExtensionBasics()
     {
         $app = $this->getApp(false);
-        $extension = new ExtensionNameExtension($app);
+        $extension = new WinLinkAPIExtension($app);
 
         $name = $extension->getName();
-        $this->assertSame($name, 'ExtensionName');
+        $this->assertSame($name, 'WinLinkAPI');
         $this->assertInstanceOf('\Bolt\Extension\ExtensionInterface', $extension);
     }
 

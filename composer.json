@@ -1,11 +1,16 @@
 {
-    "name": "bolt/bolt-extension-starter",
-    "description": "",
+    "name": "blockmurder/winlinkapi",
+    "description": "Adds a cron job which gets the latest poition reports of your callsing from WinLink.org and adds them to your database",
     "type": "bolt-extension",
+    "version": "0.1",
     "keywords": [
+        "winlink",
+        "positions",
+        "ship",
+        "radio"
     ],
     "require": {
-        "bolt/bolt": "^3.0"
+        "bolt/bolt": "^3.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.7"
@@ -13,25 +18,24 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "",
-            "email": "you@example.com"
+            "name": "blockmurder",
+            "email": "info@blockmurder.ch"
         }
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Bolt\\Extension\\YourName\\ExtensionName\\": "src"
+            "Bolt\\Extension\\Blockmurder\\WinLinkAPI\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Bolt\\Extension\\YourName\\ExtensionName\\Tests\\": "tests",
+            "Bolt\\Extension\\Blockmurder\\WinLinkAPI\\Tests\\": "tests",
             "Bolt\\Tests\\": "vendor/bolt/bolt/tests/phpunit/unit/"
         }
     },
     "extra": {
-        "bolt-assets": "web",
-        "bolt-class": "Bolt\\Extension\\YourName\\ExtensionName\\ExtensionNameExtension"
+        "bolt-class": "Bolt\\Extension\\Blockmurder\\WinLinkAPI\\WinLinkAPIExtension"
     }
 }
