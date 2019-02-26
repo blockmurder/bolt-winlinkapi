@@ -114,26 +114,16 @@ class WinLinkAPIExtension extends SimpleExtension
         $app = $this->getContainer();
         $config = $this->getConfig();
 
-        $servers = array("halifax", "sandiego", "perth", "wien");
         $password = "Jx7WRH2MNCsYq79";
+        $accessKey = "3DA3F92FAE834F3D8F524A0F000B3629";
 
-        foreach ($servers as &$server)
-        {
-            $url = "http://" . $server . ".winlink.org:8085/positionreports/get?callsign=" . $config['callsign'] . "&format=json";
-            //$url = "http://mauna-loa.web/position.html";
-            $json = file_get_contents($url);
-            $data = json_decode($json, true);
-
-            $errorCode = $data['ErrorCode'];
-
-            if(isset($errorCode) && $errorCode == 0)
-            {
-                break;
-            }
-        }
+        $url = "http://cms.winlink.org/position/reports/get?callsign=" . $config['callsign'] . "&key=" . $accessKey . "&format=json";
+        $json = file_get_contents($url);
+        $data = json_decode($json, true);
 
         if($data == NULL || !isset($data))
         {
+            $app['logger.system']->info(sprintf('No data found for %s', $url), ['event' => 'WinLinkAPI', 'source' => __CLASS__]);
             return NULL;
         }
 
@@ -220,7 +210,7 @@ class WinLinkAPIExtension extends SimpleExtension
             }
         }
 
-        $app['logger.system']->info(sprintf('Added %d new position reports from server %s.winlink.org', $positionCounter, $server), ['event' => 'WinLinkAPI', 'source' => __CLASS__]);
+        $app['logger.system']->info(sprintf('Added %d new position reports from winlink', $positionCounter), ['event' => 'WinLinkAPI', 'source' => __CLASS__]);
 
     }
 
