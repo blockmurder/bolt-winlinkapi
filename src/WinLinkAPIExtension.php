@@ -117,7 +117,7 @@ class WinLinkAPIExtension extends SimpleExtension
         $password = "Jx7WRH2MNCsYq79";
         $accessKey = "3DA3F92FAE834F3D8F524A0F000B3629";
 
-        $url = "http://cms.winlink.org/positionreports/get?callsign=" . $config['callsign'] . "&key=" . $accessKey . "&format=json";
+        $url = "http://cms.winlink.org/position/reports/get?callsign=" . $config['callsign'] . "&key=" . $accessKey . "&format=json";
         $json = file_get_contents($url);
         $data = json_decode($json, true);
 
