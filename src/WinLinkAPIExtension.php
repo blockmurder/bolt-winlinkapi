@@ -173,7 +173,8 @@ class WinLinkAPIExtension extends SimpleExtension
         {
             /* get the date of the entry */
             $date = date_create();
-            date_timestamp_set($date, (intval(preg_replace('/\D/', '', $positionReport['Timestamp']))/1000));
+            preg_match('#\((.*?)\)#', $positionReport['Timestamp'], $timestamp);
+            date_timestamp_set($date, (intval($timestamp[1]/1000)));
 
             if($oldPosition == NULL || $date > $oldPosition->get('date'))
             {
