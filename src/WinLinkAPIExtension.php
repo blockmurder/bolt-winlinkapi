@@ -220,7 +220,13 @@ class WinLinkAPIExtension extends SimpleExtension
         // Converts decimal format to DMS ( Degrees / minutes / seconds )
         $vars = explode(".",$dec);
         $deg = $vars[0];
-        $tempma = "0.".$vars[1];
+
+        if(count($vars)>1)
+        {
+              $tempma = "0.".$vars[1];
+        }else{
+             $tempma = "0.0";
+        }
 
         $tempma = $tempma * 3600;
         $min = floor($tempma / 60);

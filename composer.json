@@ -2,7 +2,7 @@
     "name": "blockmurder/winlinkapi",
     "description": "Adds a cron job which gets the latest poition reports of your callsing from WinLink.org and adds them to your database",
     "type": "bolt-extension",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "keywords": [
         "winlink",
         "positions",
